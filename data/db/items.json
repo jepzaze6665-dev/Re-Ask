@@ -1,0 +1,33 @@
+{
+  "_doc": "type: weapon|armor|use|etc · slot (armor): head_top head_mid head_low armor shield garment shoes acc · bonus: str agi vit int dex luk atk matk def mdef hit flee crit hp sp aspd(%) race{} size{} ele{} (% ดาเมจเพิ่มต่อเป้า)",
+  "dark_blade":   {"name":"ดาบอัศวินดำ","type":"weapon","wtype":"sword2h","atk":90,"ele":"neutral","weight":150,"rarity":"common","price":800,"icon":"#9a7cff",
+                   "desc":"ดาบสองมือประจำอัศวินดำ"},
+  "root_cleaver": {"name":"ขวานผ่าราก","type":"weapon","wtype":"axe","atk":135,"ele":"neutral","weight":200,"rarity":"common","price":1400,"icon":"#c0884f","lvReq":4,
+                   "bonus":{"race":{"plant":15}},"desc":"ขวานหนัก เหมาะกับมอนสเตอร์ตัวใหญ่ +15% ต่อพืช"},
+  "ember_blade":  {"name":"ดาบเปลวไฟ","type":"weapon","wtype":"sword2h","atk":120,"ele":"fire","weight":160,"rarity":"rare","price":3000,"icon":"#ff7a3a","lvReq":5,
+                   "desc":"ดาบธาตุไฟ แรงมากกับธาตุดิน (150%)"},
+  "moon_edge":    {"name":"ดาบแสงจันทร์","type":"weapon","wtype":"sword1h","atk":110,"ele":"holy","weight":100,"rarity":"rare","price":3200,"icon":"#fff3a8","lvReq":5,
+                   "bonus":{"hit":10,"race":{"demon":10}},"desc":"ดาบธาตุศักดิ์สิทธิ์ แรงกับธาตุมืด (125%) +10% ต่อปีศาจ"},
+  "lord_greatsword":{"name":"มหาดาบราชาราก","type":"weapon","wtype":"sword2h","atk":190,"ele":"neutral","weight":260,"rarity":"legend","price":12000,"icon":"#ff4d6d","lvReq":8,
+                   "bonus":{"str":3,"crit":5,"size":{"large":15}},"desc":"ดาบของราชาราก STR+3 CRIT+5 +15% ต่อตัวใหญ่"},
+
+  "cotton_shirt": {"name":"เสื้อผ้าฝ้าย","type":"armor","slot":"armor","def":3,"weight":10,"rarity":"common","price":50,"icon":"#cfc4ff","desc":"เสื้อธรรมดา"},
+  "root_mail":    {"name":"เกราะรากถัก","type":"armor","slot":"armor","def":7,"weight":120,"rarity":"common","price":900,"icon":"#8b6b4a","bonus":{"vit":1},"desc":"VIT+1"},
+  "dusk_plate":   {"name":"เกราะสนธยา","type":"armor","slot":"armor","def":11,"mdef":3,"weight":220,"rarity":"rare","price":4000,"icon":"#6a4aa8","lvReq":6,"bonus":{"hp":120},"desc":"MaxHP +120"},
+  "sprout_hat":   {"name":"หมวกต้นอ่อน","type":"armor","slot":"head_top","def":2,"weight":20,"rarity":"common","price":300,"icon":"#7bd88f","bonus":{"luk":1},"desc":"LUK+1"},
+  "shadow_mask":  {"name":"หน้ากากเงา","type":"armor","slot":"head_mid","def":1,"weight":10,"rarity":"rare","price":2500,"icon":"#b45cff","bonus":{"crit":4,"dex":1},"desc":"CRIT+4 DEX+1"},
+  "thorn_cape":   {"name":"ผ้าคลุมหนาม","type":"armor","slot":"garment","def":2,"weight":40,"rarity":"common","price":700,"icon":"#5e7a5a","bonus":{"flee":6},"desc":"FLEE+6"},
+  "root_boots":   {"name":"รองเท้าราก","type":"armor","slot":"shoes","def":2,"weight":40,"rarity":"common","price":600,"icon":"#a07850","bonus":{"agi":1},"desc":"AGI+1"},
+  "buckler":      {"name":"โล่เล็ก","type":"armor","slot":"shield","def":4,"weight":60,"rarity":"common","price":800,"icon":"#9fb3c8","desc":"ใช้คู่กับอาวุธมือเดียวเท่านั้น"},
+  "ring_might":   {"name":"แหวนพลัง","type":"armor","slot":"acc","weight":10,"rarity":"rare","price":3000,"icon":"#ffb347","bonus":{"str":2},"desc":"STR+2"},
+  "clover_charm": {"name":"เครื่องรางใบโคลเวอร์","type":"armor","slot":"acc","weight":10,"rarity":"common","price":1200,"icon":"#7bd88f","bonus":{"luk":2,"crit":1},"desc":"LUK+2 CRIT+1"},
+
+  "red_potion":   {"name":"ยาแดง","type":"use","weight":7,"rarity":"common","price":50,"icon":"#ff4d6d","use":{"hp":[45,65]},"desc":"ฟื้น HP 45~65"},
+  "orange_potion":{"name":"ยาส้ม","type":"use","weight":10,"rarity":"common","price":200,"icon":"#ff9a3a","use":{"hp":[105,145]},"desc":"ฟื้น HP 105~145"},
+  "blue_potion":  {"name":"ยาฟ้า","type":"use","weight":15,"rarity":"rare","price":500,"icon":"#5aa8ff","use":{"sp":[40,60]},"desc":"ฟื้น SP 40~60"},
+
+  "root_fiber":   {"name":"ใยราก","type":"etc","weight":1,"rarity":"common","price":10,"icon":"#8b6b4a","desc":"วัตถุดิบคราฟต์"},
+  "shadow_jelly": {"name":"เยลลี่เงา","type":"etc","weight":1,"rarity":"common","price":25,"icon":"#6a3fb0","desc":"วัตถุดิบคราฟต์"},
+  "thorn":        {"name":"หนามแหลม","type":"etc","weight":1,"rarity":"common","price":40,"icon":"#4f6b4a","desc":"วัตถุดิบคราฟต์"},
+  "dark_crystal": {"name":"ผลึกมืด","type":"etc","weight":2,"rarity":"rare","price":400,"icon":"#b48cff","desc":"ผลึกเรืองแสงจากรากต้นไม้มืด"}
+}

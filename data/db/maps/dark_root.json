@@ -1,0 +1,4 @@
+{"name":"รากต้นไม้มืด","lvText":"Lv 1-12","seed":23,"W":2600,"H":1700,
+ "safe":{"x":1300,"y":850,"r":420},
+ "spawns":[{"mob":"shadow_sprout","count":5,"respawn":5},{"mob":"shadow_root","count":5,"respawn":6},
+           {"mob":"thorn_wraith","count":3,"respawn":10},{"mob":"root_lord","count":1,"respawn":60}]}

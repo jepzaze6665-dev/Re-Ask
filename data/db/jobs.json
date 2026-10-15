@@ -1,0 +1,10 @@
+{
+  "novice":   {"name":"โนวิซ","jobLvMax":10,"hp":{"base":40,"perLv":10,"curve":0.2},"sp":{"base":10,"perLv":1},
+               "aspdBase":{"fist":50,"dagger":55,"sword1h":60},"jobBonus":{}},
+  "swordman": {"name":"นักดาบ","jobLvMax":50,"hp":{"base":60,"perLv":22,"curve":0.6},"sp":{"base":12,"perLv":2},
+               "aspdBase":{"fist":40,"dagger":65,"sword1h":55,"sword2h":60,"spear":65,"axe":70,"mace":65},
+               "jobBonus":{"2":{"str":1},"6":{"vit":1},"10":{"dex":1},"14":{"str":1},"18":{"luk":1}}},
+  "knight":   {"name":"อัศวินดำ","jobLvMax":50,"hp":{"base":120,"perLv":30,"curve":0.8},"sp":{"base":20,"perLv":3},
+               "aspdBase":{"fist":40,"dagger":60,"sword1h":52,"sword2h":55,"spear":58,"axe":62,"mace":60},
+               "jobBonus":{"2":{"vit":1},"4":{"str":1},"7":{"dex":1},"10":{"str":1},"13":{"agi":1},"16":{"vit":1},"20":{"str":1},"25":{"luk":1},"30":{"str":1}}}
+}
