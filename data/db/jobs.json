@@ -1,6 +1,6 @@
 {
-  "_doc": "attackInterval = วินาทีต่อการตี 1 ครั้งก่อนลดด้วย AGI/DEX (ดู rules.attack) และเป็นรายการอาวุธที่อาชีพนี้ใช้ได้ · parent = อาชีพก่อนหน้า (สกิลสืบทอด) · advance = เงื่อนไขเปลี่ยนเป็นอาชีพนี้ (ทดสอบที่กิลด์ในเมือง): jobLv ของอาชีพเดิม, kills นับหลังรับเควสต์, items ถูกใช้ไป, reward ได้ตอนเปลี่ยน",
-  "novice":   {"name":"โนวิซ","tier":0,"jobLvMax":10,"hp":{"base":40,"perLv":10,"curve":0.2},"sp":{"base":10,"perLv":1},
+  "_doc": "attackInterval = วินาทีต่อการตี 1 ครั้งก่อนลดด้วย AGI/DEX (ดู rules.attack) และเป็นรายการอาวุธที่อาชีพนี้ใช้ได้ · parent = อาชีพก่อนหน้า (สกิลสืบทอด) · advance = เงื่อนไขเปลี่ยนเป็นอาชีพนี้ (ทดสอบที่กิลด์ในเมือง): jobLv ของอาชีพเดิม, kills นับหลังรับเควสต์, items ถูกใช้ไป, reward ได้ตอนเปลี่ยน · jobExp = เส้นโค้ง Job EXP เฉพาะอาชีพ (ไม่ใส่ใช้ rules.jobExp)",
+  "novice":   {"name":"โนวิซ","tier":0,"jobLvMax":10,"jobExp":{"A":30,"B":8,"p":1.5},"hp":{"base":40,"perLv":10,"curve":0.2},"sp":{"base":10,"perLv":1},
                "attackInterval":{"fist":0.9,"dagger":0.9,"sword1h":1.0},"jobBonus":{}},
   "swordman": {"name":"นักดาบ","tier":1,"parent":"novice","jobLvMax":50,
                "advance":{"jobLv":10,"kills":{"shadow_sprout":5},"items":{},"reward":[{"id":"training_sword","qty":1},{"id":"red_potion","qty":10}],"text":"พิสูจน์ฝีมือ: กำจัดต้นอ่อนเงา 5 ตัวในป่ารากมืด"},"hp":{"base":60,"perLv":22,"curve":0.6},"sp":{"base":12,"perLv":2},

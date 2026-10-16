@@ -78,9 +78,10 @@ function hover(node,fn){node.onmouseenter=e=>{tip.innerHTML=fn();tip.style.displ
 const icon=(id)=>{const it=db.items[id];return `<div class="ic" style="background:radial-gradient(circle at 35% 30%,#fff8,${it.icon} 45%,#0008)"></div>`;};
 
 // ---------- หน้าต่างสเตตัส ----------
+let pick=null;   // สกิลที่คลิกเลือกไว้เพื่อวางลงปุ่มลัด
 let wS,wI,wK,wJ,wR,wB,wShop,wInn,wQ,tab='all',btns,sel=null,shopId=null,shopTab='buy',innView='menu';   // sel = uid ไอเทมที่เลือกในกระเป๋า
 function renderStatus(){const b=wS.querySelector('.bd'),d=C.d,R=db.rules,job=db.jobs[C.job];
-  const bn=RO.baseExpNeed(db,C.lv),jn=RO.jobExpNeed(db,C.jobLv);
+  const bn=RO.baseExpNeed(db,C.lv),jn=RO.jobExpNeed(db,C.jobLv,C.job);
   let h=`<div style="display:flex;justify-content:space-between"><b>${C.name}</b><span>${job.name}</span></div>
   <div style="font-size:11px">Base Lv ${C.lv} · ${C.exp}/${bn}</div><div class="xb"><div style="width:${100*C.exp/bn}%"></div></div>
   <div style="font-size:11px">Job Lv ${C.jobLv} · ${C.jobExp}/${jn}</div><div class="xb"><div style="width:${100*C.jobExp/jn}%;background:#5aa8ff"></div></div>
@@ -240,10 +241,16 @@ function skillTip(id){const sk=db.skills[id],lv=Math.max(1,C.skills[id]||0);let 
 function renderSkills(){const b=wK.querySelector('.bd');let h=`<div style="display:flex;justify-content:space-between"><b>${db.jobs[C.job].name}</b><span>แต้มสกิล <b style="color:#ffd166">${C.skillPoints}</b></span></div>`;
   for(const job of SKILLS.lineage(db,C.job)){h+=`<div class="sep"></div><div style="color:#998bc0;font-size:11px">${db.jobs[job].name}</div>`;
     for(const id of Object.keys(db.skills).filter(k=>db.skills[k].job===job)){const sk=db.skills[id],lv=C.skills[id]||0,ok=SKILLS.canLearn(db,C,id).ok;
-      h+=`<div class="row" data-tip="${id}"><span style="flex:1;${lv?'':'color:#6d6290'}">${sk.type==='passive'?'◇ ':'◆ '}${sk.name}</span><span>Lv ${lv}/${sk.maxLv}</span><button class="pb" data-k="${id}" ${ok?'':'disabled'}>+</button></div>`;}}
-  const hb=SKG.hotbar();h+=`<div class="sep"></div><div style="font-size:11px;color:#998bc0">ปุ่มลัด: ${hb.length?hb.map((id,i)=>`${i+1}=${db.skills[id].name}`).join(' · '):'ยังไม่มี (เรียนสกิล ◆ ก่อน)'}</div>`;
+      h+=`<div class="row" data-tip="${id}" ${sk.type==='active'&&lv?`draggable="true" data-drag="${id}" style="cursor:grab"`:''}><span style="flex:1;${lv?'':'color:#6d6290'}">${sk.type==='passive'?'◇ ':'◆ '}${sk.name}</span><span>Lv ${lv}/${sk.maxLv}</span><button class="pb" data-k="${id}" ${ok?'':'disabled'}>+</button></div>`;}}
+  const hb=SKG.hotbar();h+=`<div class="sep"></div><div style="font-size:11px;color:#998bc0;margin-bottom:4px">ปุ่มลัด — ลากสกิล ◆ มาวาง (หรือคลิกสกิลแล้วคลิกช่อง) · คลิกขวาที่ช่อง = ล้าง</div><div style="display:flex;gap:4px">`;
+  hb.forEach((id,i)=>{h+=`<div class="slot" data-hb="${i}" style="flex:1;height:40px;flex-direction:column;justify-content:center;gap:0;padding:2px;${pick?'outline:1px dashed #ffd166':''}"><b style="font-size:10px">${i+1}</b><span style="font-size:10px;white-space:normal;text-align:center;line-height:1.1">${id?db.skills[id].name:'—'}</span></div>`;});
+  h+='</div>';
   b.innerHTML=h;
-  b.querySelectorAll('[data-k]').forEach(x=>x.onclick=()=>{const e=RPG.raiseSkill(x.dataset.k);if(e)toast(e);});
+  b.querySelectorAll('[data-k]').forEach(x=>x.onclick=e=>{e.stopPropagation();const er=RPG.raiseSkill(x.dataset.k);if(er)toast(er);});
+  b.querySelectorAll('[data-drag]').forEach(x=>{x.ondragstart=e=>{e.dataTransfer.setData('text/skill',x.dataset.drag);};x.onclick=()=>{pick=pick===x.dataset.drag?null:x.dataset.drag;renderSkills();};});
+  b.querySelectorAll('[data-hb]').forEach(x=>{const i=+x.dataset.hb;x.ondragover=e=>e.preventDefault();
+    x.ondrop=e=>{e.preventDefault();const id=e.dataTransfer.getData('text/skill');if(id){SKG.setSlot(i,id);renderSkills();}};
+    x.onclick=()=>{if(pick){SKG.setSlot(i,pick);pick=null;renderSkills();}};x.oncontextmenu=e=>{e.preventDefault();SKG.setSlot(i,null);renderSkills();};});
   b.querySelectorAll('[data-tip]').forEach(x=>hover(x,()=>skillTip(x.dataset.tip)));}
 
 // ---------- หน้าต่างกิลด์: เปลี่ยนอาชีพ ----------

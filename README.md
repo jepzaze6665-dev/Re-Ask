@@ -25,7 +25,7 @@ Re-Ask/
 │   ├─ rng.js          สุ่มแบบ seed
 │   └─ validate.js     ตรวจ data/db
 ├─ test/               เทสต์อัตโนมัติ (node:test)
-├─ tools/              load_db.js, validate_db.js
+├─ tools/              load_db.js, validate_db.js, balance_sim.js (จำลองสมดุล)
 ├─ data/db/            ✎ ข้อมูลเกม (ของเกมเอง ไม่ถูก export ทับ): rules items mobs jobs skills maps/
 ├─ engine/             ⚠ มาจากสตูดิโอ (export ทับ) — อย่าแก้ที่นี่ ให้แก้ใน "สอน AI/engine" แล้ว export
 │   ├─ rig.js          ตัวละครกระดูก + ท่า + เหตุการณ์คีย์
@@ -53,4 +53,6 @@ python tools/export_game.py --clips "C:/Users/User/Downloads/clips.json"   # พ
 ```
 npm install        # ครั้งแรก (typescript สำหรับตรวจ type)
 npm run check      # ตรวจ data/db + ตรวจ type + เทสต์ทั้งหมด
+node tools/balance_sim.js 30      # จำลองฟาร์ม 30 ชม. ดูสมดุล
+node tools/balance_sim.js rifts   # ทดสอบความยากประตูมิติ (หลังรันแบบแรก)
 ```

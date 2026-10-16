@@ -22,7 +22,7 @@ const rng=RNG.make(seed);
 // ---------- ตัวละคร ----------
 let C=null;          // ตัวละคร (ฝากไว้บนตัว rig P ด้วย Object.assign)
 const listeners=[];const changed=()=>listeners.forEach(f=>f());
-const SAVE_FIELDS=['name','job','lv','jobLv','exp','jobExp','stats','statPoints','skillPoints','skills','inv','nonce','jobQuest','codex','storage','qs'];
+const SAVE_FIELDS=['name','job','lv','jobLv','exp','jobExp','stats','statPoints','skillPoints','skills','inv','nonce','jobQuest','codex','storage','qs','hotbar'];
 const nonce=()=>Math.random().toString(36).slice(2,10);
 function newInv(s){const inv=INV.create();
   INV.apply(db,inv,{key:'start',reason:'start',zeny:s.zeny,add:[...s.bag.map(b=>({id:b.id,qty:b.qty})),...Object.values(s.equip).map(id=>({id,qty:1}))]});
@@ -104,7 +104,8 @@ const findUsable=kind=>bag().find(s=>{const u=db.items[s.id].use;return u&&u[kin
 // ---------- รางวัลจากการฆ่า ----------
 // zeny เข้ากระเป๋าทันที · ไอเทมตกพื้น (แต่ละชิ้นมี key ของตัวเอง → เก็บซ้ำไม่ได้)
 function killReward(mob,killId,say,mobId,shadowMult=1){
-  gainExp(mob.exp,mob.jobExp,say,'exp:'+killId);
+  const em=RO.expMult(db,C.lv,mob.lv);   // มอนเลเวลต่ำกว่ามาก = EXP น้อยลง
+  gainExp(Math.round(mob.exp*em),Math.round(mob.jobExp*em),say,'exp:'+killId);
   const d=INV.rollDrops(db,mob,C.d.S.luk,rng);
   const sh=mobId&&SHADOW.roll(db,mobId,C.d.S.luk,rng,shadowMult);if(sh)d.items.push(sh);   // เงาอสูร (ลุ้นล้วน)
   if(mobId){const before=REFINE.tier(db,mobId,C.codex[mobId]||0);C.codex[mobId]=(C.codex[mobId]||0)+1;

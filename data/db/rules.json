@@ -42,6 +42,8 @@
   "damage": {"defScale": 100, "variance": 0.05, "critMultiplier": 1.4, "critLukShield": 0.2, "vitToDef": 0.5},
   "hit": {"base": 0.95, "perPoint": 0.005, "min": 0.50, "max": 1.00},
   "attack": {"minInterval": 0.30, "agiReduce": 0.004, "dexReduce": 0.001, "maxReduction": 0.60, "rangeSlack": 30},
+  "_expLevelDiff": "ตัวคูณ EXP ตาม (เลเวลมอน − เลเวลผู้เล่น): แถวแรกที่ส่วนต่าง ≥ min · กันฟาร์มมอนเลเวลต่ำจนเลเวลพุ่งเกินเนื้อหา",
+  "expLevelDiff": [{"min": 5, "pct": 120}, {"min": -3, "pct": 100}, {"min": -6, "pct": 75}, {"min": -10, "pct": 40}, {"min": -15, "pct": 15}, {"min": -999, "pct": 5}],
   "deathExpLoss": 0.01,
   "dropLukBonus": 0.01,
   "_ai": "ค่าเริ่มต้น AI มอน (mobs.json ai ทับได้) · detect = ระยะเห็นผู้เล่น · chase = ระยะเลิกไล่ · leash = ห่างจุดเกิดเกินนี้แล้วกลับ · windup = วินาทีง้างก่อนตี (หลบได้ถ้าออกนอกระยะ × dodgeSlack) · assist = เรียกพวกชนิดเดียวกันในรัศมี",

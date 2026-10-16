@@ -269,7 +269,7 @@ function hud(t){
   ctx.fillStyle='#cfc4ff';ctx.font='700 12px system-ui';ctx.textAlign='right';ctx.fillText(`Lv ${P.lv} / Job ${P.jobLv}`,280,36);
   bar(28,44,252,14,P.hp/P.hpMax,'#ff4d6d',`HP ${Math.round(P.hp)} / ${P.hpMax}`);
   bar(28,62,252,12,P.sp/P.spMax,'#5aa8ff',`SP ${Math.round(P.sp)} / ${P.spMax}`);
-  const need=RO.baseExpNeed(DB,P.lv),jneed=RO.jobExpNeed(DB,P.jobLv);ctx.fillStyle='#0008';ctx.fillRect(0,H-9,W,9);ctx.fillStyle='#ffd166';ctx.fillRect(0,H-9,W*P.exp/need,5);ctx.fillStyle='#5aa8ff';ctx.fillRect(0,H-4,W*P.jobExp/jneed,4);
+  const need=RO.baseExpNeed(DB,P.lv),jneed=RO.jobExpNeed(DB,P.jobLv,P.job);ctx.fillStyle='#0008';ctx.fillRect(0,H-9,W,9);ctx.fillStyle='#ffd166';ctx.fillRect(0,H-9,W*P.exp/need,5);ctx.fillStyle='#5aa8ff';ctx.fillRect(0,H-4,W*P.jobExp/jneed,4);
   // แถบสกิล
   const cnt=k=>{const s=RPG.findUsable(k);return s?s.qty:0;};
   const slots=[{k:'J',name:'ล็อกเป้า',col:'#cfd8e6',cd:0,max:1},...SKG.hudSlots(),

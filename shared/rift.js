@@ -4,9 +4,9 @@
 //  เบราว์เซอร์: window.RIFT · Node: require('./shared/rift.js')
 // =====================================================================
 (function(root,factory){
-  const m=typeof module==='object'&&module.exports?factory(require('./rng.js'),require('./dungeon.js')):factory(root.RNG,root.DUNGEON);
+  const m=typeof module==='object'&&module.exports?factory(require('./rng.js'),require('./dungeon.js'),require('./ro.js')):factory(root.RNG,root.DUNGEON,root.RO);
   if(typeof module==='object'&&module.exports)module.exports=m;else root.RIFT=m;
-})(typeof self!=='undefined'?self:globalThis,function(RNG,DUNGEON){
+})(typeof self!=='undefined'?self:globalThis,function(RNG,DUNGEON,RO){
 
 const tier=(db,id)=>db.rifts.tiers.find(t=>t.id===id);
 /** สุ่มสีประตูตาม weight */
@@ -33,10 +33,11 @@ function plan(db,tierId,seed){const T=tier(db,tierId);return DUNGEON.generate(db
 /** ค่ามอนในดันตามสี (เกมนำไปใช้ตอนวางมอน) */
 function mobScale(db,tierId){const T=tier(db,tierId);return {hpMult:T.hpMult,atkPct:T.atkPct,expMult:T.expMult,bossHpMult:T.bossHpMult,shadowMult:T.shadowMult};}
 
-/** รางวัลจบดันตามสี = รางวัล template × rewardMult (EXP/zeny) + ของเพิ่มของสี */
-function reward(db,tierId,rng){const T=tier(db,tierId),base=DUNGEON.rollReward(db,T.template,rng);
+/** รางวัลจบดันตามสี = รางวัล template × rewardMult (EXP/zeny) + ของเพิ่มของสี · EXP ลดตามส่วนต่างเลเวล (ผู้เล่น vs บอส+lvBonus) ถ้าให้ playerLv */
+function reward(db,tierId,rng,playerLv){const T=tier(db,tierId),base=DUNGEON.rollReward(db,T.template,rng);
+  const em=playerLv==null?1:RO.expMult(db,playerLv,db.mobs[db.dungeons[T.template].boss.mob].lv+(T.lvBonus||0));
   const extra=T.extraItems.filter(x=>rng()*100<x.rate).map(x=>({id:x.id,qty:x.qty}));
-  return {exp:Math.round(base.exp*T.rewardMult),jobExp:Math.round(base.jobExp*T.rewardMult),zeny:Math.round(base.zeny*T.rewardMult),items:[...base.items,...extra]};}
+  return {exp:Math.round(base.exp*T.rewardMult*em),jobExp:Math.round(base.jobExp*T.rewardMult*em),zeny:Math.round(base.zeny*T.rewardMult),items:[...base.items,...extra]};}
 
 return {tier,rollTier,nextDelay,place,plan,mobScale,reward};
 });

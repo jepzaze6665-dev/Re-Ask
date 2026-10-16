@@ -48,7 +48,7 @@ function onLeave(){if(run&&!run.cleared)say('ออกจากประตู�
 
 function spawnAt(id,x,y,patch){spawnMob(id,0);const m=mobs[mobs.length-1];Object.assign(m,{x,y,hx:x,hy:y,dungeon:true},patch||{});return m;}
 /** ทำให้มอนแรงขึ้นตามสีประตู (+ ดุร้าย) */
-function scale(m,k,{hpMult,atkPct,expMult,name,edge,size}){m.k={...k,name,exp:Math.round(k.exp*expMult),jobExp:Math.round(k.jobExp*expMult)};m.name=name;
+function scale(m,k,{hpMult,atkPct,expMult,name,edge,size}){m.k={...k,name,lv:k.lv+(run.T.lvBonus||0),exp:Math.round(k.exp*expMult),jobExp:Math.round(k.jobExp*expMult)};m.name=name;m.lv=m.k.lv;
   m.hp=m.hpMax=Math.round(k.hp*hpMult);m.phaseMods={atkPct};m.shadowMult=run.T.shadowMult;if(edge)m.look={...m.look,scale:m.look.scale*(size||1),edge};}
 function populate(){if(!run)return;const E=DB.dungeons[run.id].elite,T=run.T;
   for(const d of run.plan.mobs){const k=DB.mobs[d.mob],m=spawnAt(d.mob,d.x,d.y);
@@ -63,7 +63,7 @@ function spawnBoss(){const B=DB.dungeons[run.id].boss,T=run.T,k=DB.mobs[B.mob],b
 function onKill(m){if(!run||!m.dungeon)return;
   if(m.dBoss){clear();return;}
   run.killed++;if(!run.boss&&DUNGEON.progress(DB,run.plan,run.killed).bossOpen)spawnBoss();}
-function clear(){run.cleared=true;const rw=RIFT.reward(DB,run.tier,RPG.rng),r=RPG.dungeonClaim(run.key,rw,say);
+function clear(){run.cleared=true;const rw=RIFT.reward(DB,run.tier,RPG.rng,P.lv),r=RPG.dungeonClaim(run.key,rw,say);
   const b=run.plan.boss,w=DB.maps.dungeon.warps[0];DB.maps.dungeon.warps.push({...w,label:'กลับ',x:b.x,y:b.y+90,r:48});
   say(r?`จบดันแล้ว! แต่รับรางวัลไม่ได้: ${r}`:`ปิดประตูสี${run.T.name}! ได้ ${rw.exp} EXP · ${rw.zeny} z${rw.items.length?' + '+rw.items.map(x=>DB.items[x.id].name+' ×'+x.qty).join(', '):''}`);}
 

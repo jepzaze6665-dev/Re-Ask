@@ -13,6 +13,7 @@ function validateDb(db){const E=[],R=db.rules,err=(w,m)=>E.push(w+': '+m);
   for(const e of els){const row=R.elementTable[e];if(!row||row.length!==els.length)err('rules.elementTable',e+' ต้องมี '+els.length+' ค่า');}
   for(const k of ['A','B','p'])for(const t of ['baseExp','jobExp'])if(!num(R[t][k],0))err('rules.'+t,k+' ต้องเป็นตัวเลข ≥ 0');
   if(!num(R.hit.min,0,1)||!num(R.hit.max,R.hit.min,1))err('rules.hit','min/max ต้องอยู่ใน 0..1');
+  if(!Array.isArray(R.expLevelDiff)||R.expLevelDiff.some((r,i)=>i&&r.min>=R.expLevelDiff[i-1].min))err('rules.expLevelDiff','ต้องเรียง min จากมากไปน้อย');
   if(!num(R.attack.minInterval,0.05))err('rules.attack','minInterval ต้อง ≥ 0.05 วินาที');
   if(!num(R.attack.maxReduction,0,0.95))err('rules.attack','maxReduction ต้องอยู่ใน 0..0.95');
   for(const [id,it] of Object.entries(db.items)){const w='items.'+id;

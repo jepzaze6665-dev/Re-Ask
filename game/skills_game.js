@@ -12,7 +12,12 @@ const mobFlags=m=>STATUS.flags(DB,m.st,NOW);
 const wtype=()=>P.d.wtype;
 
 // ---------- แถบปุ่มลัด ----------
-function hotbar(){return SKILLS.skillsFor(DB,P.job).filter(id=>DB.skills[id].type==='active'&&lvOf(id)>0).slice(0,6);}
+const usable=id=>id&&DB.skills[id]&&DB.skills[id].type==='active'&&lvOf(id)>0;
+/** ปุ่มลัด 6 ช่อง: ผู้เล่นจัดเอง (P.hotbar) — ยังไม่เคยจัด = เรียงอัตโนมัติตามสายอาชีพ · ช่องว่าง = null */
+function hotbar(){if(P.hotbar)return P.hotbar.map(id=>usable(id)?id:null);
+  const auto=SKILLS.skillsFor(DB,P.job).filter(usable).slice(0,6);while(auto.length<6)auto.push(null);return auto;}
+/** ใส่สกิลลงช่อง i (0–5) · id=null = ล้างช่อง · สกิลเดิมที่อยู่ช่องอื่นย้ายมา */
+function setSlot(i,id){const hb=hotbar();if(id){const j=hb.indexOf(id);if(j>=0)hb[j]=null;}hb[i]=id;P.hotbar=hb;RPG.save();}
 function castSlot(n){const id=hotbar()[n-1];if(!id)return say('ยังไม่มีสกิลในช่อง '+n+' (กด K เพื่อเรียนสกิล)');castSkill(id);}
 
 // ---------- ร่าย ----------
@@ -101,11 +106,11 @@ function drawWorld(t){
   if(P.casting){const c=P.casting,w=70,x=P.x-w/2,y=P.y+30;ctx.save();ctx.fillStyle='#000a';ctx.fillRect(x-1,y-1,w+2,9);ctx.fillStyle='#7fd0ff';ctx.fillRect(x,y,w*c.t/c.total,7);
     ctx.font='800 11px system-ui';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText(DB.skills[c.id].name,P.x,y+20);ctx.restore();}}
 /** ช่องในแถบ HUD (main.js วาด) */
-function hudSlots(){return hotbar().map((id,i)=>{const sk=DB.skills[id],info=SKILLS.castInfo(DB,id,lvOf(id));
+function hudSlots(){return hotbar().map((id,i)=>{if(!id)return {k:String(i+1),name:'',col:'#3a2d55',cd:0,max:1};const sk=DB.skills[id],info=SKILLS.castInfo(DB,id,lvOf(id));
   return {k:String(i+1),name:`${sk.name} ${lvOf(id)}`,col:sk.element==='fire'?'#ff7a3a':sk.job==='knight'?'#b45cff':sk.job==='novice'?'#7bd88f':'#cfd8e6',cd:Math.max(0,(P.cds[id]||0)-NOW),max:Math.max(.01,info.cd)};});}
 
 // ---------- มอน ----------
 function mobProfileNow(m){const s=STATUS.mods(m.st,NOW);if(m.phaseMods)for(const k in m.phaseMods)s[k]=(s[k]||0)+m.phaseMods[k];return RO.withMods(m.prof,s);}   // + เฟสบอส
 
-return {now,castSlot,castSkill,wantRange,tryPending,onPlayerHit,onSwarmEvent,update,playerBusy,drawWorld,hudSlots,mobFlags,mobProfileNow,hotbar};
+return {now,setSlot,castSlot,castSkill,wantRange,tryPending,onPlayerHit,onSwarmEvent,update,playerBusy,drawWorld,hudSlots,mobFlags,mobProfileNow,hotbar};
 })();

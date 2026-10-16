@@ -21,7 +21,10 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 /** EXP_next(L) = floor(A + B × L^p) @param {{A:number,B:number,p:number}} c @param {number} lv */
 const expNeed=(c,lv)=>Math.floor(c.A+c.B*Math.pow(lv,c.p));
 const baseExpNeed=(db,lv)=>expNeed(db.rules.baseExp,lv);
-const jobExpNeed=(db,lv)=>expNeed(db.rules.jobExp,lv);
+/** Job EXP: อาชีพกำหนดเส้นโค้งเองได้ (jobs[job].jobExp) ไม่งั้นใช้ rules.jobExp */
+const jobExpNeed=(db,lv,job)=>expNeed((job&&db.jobs[job]&&db.jobs[job].jobExp)||db.rules.jobExp,lv);
+/** ตัวคูณ EXP ตามส่วนต่างเลเวล (มอน − ผู้เล่น) จาก rules.expLevelDiff — ฟาร์มมอนเลเวลต่ำกว่ามากได้ EXP น้อยลง */
+function expMult(db,playerLv,mobLv){const d=mobLv-playerLv;for(const r of db.rules.expLevelDiff)if(d>=r.min)return r.pct/100;return 0;}
 /** แต้มที่ต้องใช้เพื่อเพิ่ม stat จาก v → v+1 */
 const statCost=v=>Math.floor((v-1)/10)+2;
 /** แต้มสเตตัสที่ได้ตอนขึ้นถึง lv */
@@ -36,7 +39,7 @@ function applyExp(db,c,base,job){
   exp+=Math.max(0,Math.floor(base));jobExp+=Math.max(0,Math.floor(job));
   while(lv<R.baseLvMax&&exp>=baseExpNeed(db,lv)){exp-=baseExpNeed(db,lv);lv++;stat+=statPointsOnLevel(lv);}
   if(lv>=R.baseLvMax)exp=0;
-  while(jobLv<jmax&&jobExp>=jobExpNeed(db,jobLv)){jobExp-=jobExpNeed(db,jobLv);jobLv++;skill++;}
+  while(jobLv<jmax&&jobExp>=jobExpNeed(db,jobLv,c.job)){jobExp-=jobExpNeed(db,jobLv,c.job);jobLv++;skill++;}
   if(jobLv>=jmax)jobExp=0;
   return {lv,jobLv,exp,jobExp,statPoints:stat,skillPoints:skill,baseUp:lv-c.lv,jobUp:jobLv-c.jobLv};}
 
@@ -125,5 +128,5 @@ function physical(db,A,D,o){
   const dmg=eleMod<=0?0:Math.max(1,Math.floor(raw));
   return {dmg,crit,miss:false,eleMod};}
 
-return {STATS,SLOTS,expNeed,baseExpNeed,jobExpNeed,statCost,statPointsOnLevel,applyExp,sumBonus,withMods,attackInterval,hitChance,derive,mobProfile,physical};
+return {STATS,SLOTS,expNeed,baseExpNeed,jobExpNeed,expMult,statCost,statPointsOnLevel,applyExp,sumBonus,withMods,attackInterval,hitChance,derive,mobProfile,physical};
 });

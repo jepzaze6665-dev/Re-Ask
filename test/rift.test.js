@@ -10,7 +10,7 @@ test('สีประตูเริ่มที่น้ำเงิน · ส�
   assert.ok(n.red<n.gold&&n.gold<n.purple&&n.purple<n.blue);});
 
 test('สีสูง = โหดขึ้นและรางวัลมากขึ้นทุกด้าน',()=>{const T=db.rifts.tiers;
-  for(let i=1;i<T.length;i++)for(const k of ['hpMult','atkPct','eliteChance','rewardMult','shadowMult','recLv'])assert.ok(T[i][k]>T[i-1][k],`${T[i].id}.${k}`);});
+  for(let i=1;i<T.length;i++)for(const k of ['hpMult','atkPct','eliteChance','rewardMult','shadowMult','recLv','lvBonus'])assert.ok(T[i][k]>T[i-1][k],`${T[i].id}.${k}`);});
 
 test('ตำแหน่งประตู: ไม่อยู่ในเขตปลอดภัย · ไม่ใกล้ผู้เล่น · ไม่ใกล้ประตูอื่น',()=>{
   const map={W:2600,H:1700,safe:{x:1300,y:850,r:420}},rng=RNG.make(3);
@@ -19,12 +19,13 @@ test('ตำแหน่งประตู: ไม่อยู่ในเขต
 
 test('แผนดันของประตูใช้ template ตามสี และอัตรามอนดุร้ายตามสี',()=>{
   let e=0,t=0;for(let s=1;s<=200;s++){const p=RIFT.plan(db,'red',s);assert.equal(p.id,'deep_roots');for(const m of p.mobs){t++;if(m.elite)e++;}}
-  assert.ok(Math.abs(e/t*100-50)<4,'แดง ~50% ได้ '+e/t*100);
-  assert.deepEqual(RIFT.plan(db,'blue',9),DG.generate(db,'shadow_hollow',9,{eliteChance:15}));});
+  const ec=RIFT.tier(db,'red').eliteChance;assert.ok(Math.abs(e/t*100-ec)<4,`แดง ~${ec}% ได้ `+e/t*100);
+  assert.deepEqual(RIFT.plan(db,'blue',9),DG.generate(db,'shadow_hollow',9,{eliteChance:RIFT.tier(db,'blue').eliteChance}));});
 
 test('รางวัลประตู = template × rewardMult + ของเพิ่ม',()=>{
-  const b=DG.rollReward(db,'shadow_hollow',RNG.make(4)),r=RIFT.reward(db,'purple',RNG.make(4));
-  assert.equal(r.zeny,Math.round(b.zeny*4));assert.equal(r.exp,Math.round(b.exp*4));assert.ok(r.items.filter(x=>x.id==='refine_ore').length>=2);});
+  const b=DG.rollReward(db,'shadow_hollow',RNG.make(4)),r=RIFT.reward(db,'purple',RNG.make(4)),m=RIFT.tier(db,'purple').rewardMult;
+  assert.equal(r.zeny,Math.round(b.zeny*m));assert.equal(r.exp,Math.round(b.exp*m));
+  const low=RIFT.reward(db,'purple',RNG.make(4),99);assert.ok(low.exp<r.exp*0.1,'เลเวลสูงกว่าบอสมาก EXP รางวัลน้อยลง');assert.equal(low.zeny,r.zeny,'เงินไม่ลด');assert.ok(r.items.filter(x=>x.id==='refine_ore').length>=2);});
 
 test('โอกาสดรอปเงาอสูรคูณตามสี',()=>{let a=0,b=0;const r1=RNG.make(8),r2=RNG.make(8),N=100000;
   for(let i=0;i<N;i++){if(SH.roll(db,'shadow_root',0,r1))a++;if(SH.roll(db,'shadow_root',0,r2,8))b++;}
