@@ -1,0 +1,9 @@
+{
+  "_doc": "ร้าน NPC และโรงแรม · ราคาซื้อ = items[id].price · ราคาขาย = floor(price × sellRate) · ไอเทมราคา 0 ขายไม่ได้ · npc = ชื่อวัตถุใน layout เมือง (กด F)",
+  "sellRate": 0.5,
+  "shops": {
+    "item_shop":   {"name": "ร้านของชำ", "npc": "item_shop", "items": ["red_potion", "orange_potion", "blue_potion", "refine_ore"]},
+    "weapon_shop": {"name": "ร้านอาวุธ", "npc": "weapon_shop", "items": ["knife", "training_sword", "dark_blade", "cotton_shirt", "buckler", "root_boots", "thorn_cape"]}
+  },
+  "inn": {"npc": "inn", "name": "โรงแรม", "restCost": 50, "storageFee": 40, "storageSlots": 100}
+}

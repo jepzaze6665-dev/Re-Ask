@@ -1,0 +1,10 @@
+{
+  "_doc": "สมุดล่า: ฆ่ามอนแต่ละชนิดครบจำนวน (tiers) ได้โบนัสถาวรขั้นนั้น (สะสมทุกขั้นที่ผ่าน) · tiers ใส่เฉพาะมอนได้ ไม่ใส่ใช้ค่า default",
+  "defaultTiers": [30, 150, 500],
+  "mobs": {
+    "shadow_sprout": {"bonus": [{"hp": 10}, {"hp": 25}, {"hpPct": 2}]},
+    "shadow_root":   {"bonus": [{"atk": 2}, {"atk": 4}, {"size": {"medium": 3}}]},
+    "thorn_wraith":  {"bonus": [{"flee": 2}, {"flee": 3}, {"race": {"demon": 5}}]},
+    "root_lord":     {"tiers": [1, 5, 20], "bonus": [{"str": 1}, {"vit": 1}, {"atkPct": 2}]}
+  }
+}

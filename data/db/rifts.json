@@ -1,0 +1,19 @@
+{
+  "_doc": "ประตูมิติ (Rift) สุ่มเกิดในแมพทุ่ง/ป่า · เข้าได้อิสระ (มีคำเตือนถ้าเลเวลต่ำกว่า recLv) · ใช้ได้ครั้งเดียว · ด้านในเป็นดันสุ่มจาก dungeons.json (template) ปรับความโหดตามสี",
+  "_maps": "ต่อแมพ: max = ประตูพร้อมกันสูงสุด · interval = วินาทีระหว่างการเกิด [min,max] · life = วินาทีก่อนประตูหาย · firstDelay = วินาทีแรกหลังเข้าแมพ",
+  "maps": {
+    "dark_root": {"max": 2, "interval": [180, 300], "life": 600, "firstDelay": 20}
+  },
+  "_tiers": "weight = น้ำหนักสุ่มสี · template = ดันที่ใช้ · hpMult/atkPct = มอนในดันแรงขึ้น · eliteChance = % มอนดุร้าย (ทับค่าใน template) · bossHpMult = คูณเพิ่มจาก template · expMult = EXP มอน · rewardMult = รางวัลจบดัน (EXP/zeny) · shadowMult = โอกาสดรอปเงาอสูรในดัน · extraItems = รางวัลเพิ่ม",
+  "tiers": [
+    {"id": "blue",   "name": "น้ำเงิน", "rank": "C", "color": "#4da3ff", "weight": 55, "recLv": 5,  "template": "shadow_hollow",
+     "hpMult": 1.5, "atkPct": 30,  "eliteChance": 15, "bossHpMult": 1.0, "expMult": 1.5, "rewardMult": 2.5, "shadowMult": 1.5, "extraItems": []},
+    {"id": "purple", "name": "ม่วง",    "rank": "B", "color": "#b45cff", "weight": 28, "recLv": 10, "template": "shadow_hollow",
+     "hpMult": 2.2, "atkPct": 70,  "eliteChance": 25, "bossHpMult": 1.8, "expMult": 2.5, "rewardMult": 4,   "shadowMult": 3,   "extraItems": [{"id": "refine_ore", "qty": 2, "rate": 100}]},
+    {"id": "gold",   "name": "ทอง",     "rank": "A", "color": "#ffc83d", "weight": 13, "recLv": 16, "template": "deep_roots",
+     "hpMult": 3,   "atkPct": 120, "eliteChance": 35, "bossHpMult": 2,   "expMult": 4,   "rewardMult": 7,   "shadowMult": 5,   "extraItems": [{"id": "refine_ore", "qty": 4, "rate": 100}, {"id": "lord_greatsword", "qty": 1, "rate": 10}]},
+    {"id": "red",    "name": "แดง",     "rank": "S", "color": "#ff3b3b", "weight": 4,  "recLv": 24, "template": "deep_roots",
+     "hpMult": 4.5, "atkPct": 200, "eliteChance": 50, "bossHpMult": 3,   "expMult": 6,   "rewardMult": 12,  "shadowMult": 8,   "extraItems": [{"id": "refine_ore", "qty": 8, "rate": 100}, {"id": "lord_greatsword", "qty": 1, "rate": 25}, {"id": "reset_stat_stone", "qty": 1, "rate": 30}]}
+  ],
+  "safeFromPlayer": 350
+}

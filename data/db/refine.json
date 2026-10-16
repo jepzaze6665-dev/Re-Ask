@@ -1,0 +1,19 @@
+{
+  "_doc": "ตีบวก +1~+10 · levels[i] = การตีจาก +i ไป +(i+1) · success % · zeny ค่าตี · fail: none=ไม่เสียอะไรนอกจากค่าตี, down=ลด 1 ขั้น, break=อุปกรณ์แตกหาย · material = ไอเทมที่ใช้ 1 ชิ้นต่อครั้ง · bonus ต่อขั้น",
+  "max": 10,
+  "material": "refine_ore",
+  "levels": [
+    {"success":100,"zeny":100,"fail":"none"},
+    {"success":100,"zeny":200,"fail":"none"},
+    {"success":100,"zeny":300,"fail":"none"},
+    {"success":100,"zeny":400,"fail":"none"},
+    {"success":70,"zeny":800,"fail":"down"},
+    {"success":55,"zeny":1200,"fail":"down"},
+    {"success":40,"zeny":2000,"fail":"down"},
+    {"success":25,"zeny":3000,"fail":"break"},
+    {"success":15,"zeny":5000,"fail":"break"},
+    {"success":10,"zeny":8000,"fail":"break"}
+  ],
+  "bonus": {"weapon": {"atk": 6}, "armor": {"def": 1}},
+  "glowFrom": 7
+}

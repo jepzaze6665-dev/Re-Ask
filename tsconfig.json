@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "allowJs": true, "checkJs": true, "noEmit": true,
+    "target": "es2022", "module": "commonjs", "moduleResolution": "node",
+    "strict": false, "noImplicitAny": false, "lib": ["es2022", "dom"], "types": ["node"]
+  },
+  "include": ["shared/**/*.js", "tools/**/*.js", "test/**/*.js"]
+}

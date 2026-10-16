@@ -1,0 +1,121 @@
+{
+ "_doc": "เควสต์ (กระดานเควสต์ในเมือง กด F) · objectives: kill{mob,n} · collect{item,n,consume} (นับจากกระเป๋า, consume = หักตอนส่ง) · talk{npc} (กด F ที่ NPC) · repeat: none|daily (รีเซ็ตเที่ยงคืนเวลาเครื่อง) · reward: exp, jobExp, zeny, items",
+ "q_intro": {
+  "name": "ทักทายเมือง",
+  "desc": "ไปดูน้ำพุกลางเมือง แล้วกลับมาที่กระดาน",
+  "lv": 1,
+  "repeat": "none",
+  "objectives": [
+   {
+    "type": "talk",
+    "npc": "fountain"
+   }
+  ],
+  "reward": {
+   "exp": 60,
+   "jobExp": 40,
+   "zeny": 100,
+   "items": [
+    {
+     "id": "red_potion",
+     "qty": 5
+    }
+   ]
+  }
+ },
+ "q_sprout_cull": {
+  "name": "กำจัดต้นอ่อนเงา",
+  "desc": "ต้นอ่อนเงาขยายพันธุ์เร็วเกินไป กำจัด 10 ตัว",
+  "lv": 1,
+  "repeat": "daily",
+  "objectives": [
+   {
+    "type": "kill",
+    "mob": "shadow_sprout",
+    "n": 10
+   }
+  ],
+  "reward": {
+   "exp": 300,
+   "jobExp": 200,
+   "zeny": 200,
+   "items": [
+    {
+     "id": "red_potion",
+     "qty": 5
+    }
+   ]
+  }
+ },
+ "q_fiber": {
+  "name": "ส่งใยราก",
+  "desc": "ช่างทอต้องการใยราก 10 เส้น",
+  "lv": 2,
+  "repeat": "daily",
+  "objectives": [
+   {
+    "type": "collect",
+    "item": "root_fiber",
+    "n": 10,
+    "consume": true
+   }
+  ],
+  "reward": {
+   "zeny": 400,
+   "items": [
+    {
+     "id": "orange_potion",
+     "qty": 3
+    }
+   ]
+  }
+ },
+ "q_wraith": {
+  "name": "ล่าภูตหนาม",
+  "desc": "ภูตหนามโจมตีนักเดินทาง กำจัด 8 ตัว",
+  "lv": 6,
+  "repeat": "daily",
+  "objectives": [
+   {
+    "type": "kill",
+    "mob": "thorn_wraith",
+    "n": 8
+   }
+  ],
+  "reward": {
+   "exp": 1500,
+   "jobExp": 900,
+   "zeny": 600,
+   "items": [
+    {
+     "id": "refine_ore",
+     "qty": 1
+    }
+   ]
+  }
+ },
+ "q_root_lord": {
+  "name": "โค่นราชาราก",
+  "desc": "ราชารากคือต้นเหตุของเงา จงโค่นมัน",
+  "lv": 10,
+  "repeat": "none",
+  "objectives": [
+   {
+    "type": "kill",
+    "mob": "root_lord",
+    "n": 1
+   }
+  ],
+  "reward": {
+   "exp": 4000,
+   "jobExp": 2500,
+   "zeny": 2000,
+   "items": [
+    {
+     "id": "refine_ore",
+     "qty": 3
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,10 @@
+{
+  "_doc": "สถานะ (บัฟ/ดีบัฟ/CC) · ตัวรัน shared/status.js · stack: refresh = ติดซ้ำแล้วต่อเวลา (ใช้ค่าใหม่ถ้าแรงกว่า) · flags: cantMove cantAct cantCast noFlinch · dot = ดาเมจทุก tick วินาที (pctMaxHp ของผู้ติด) · mods = โบนัสขณะติด (ใส่ตอนติดจากสกิล)",
+  "stun":    {"name":"สตัน","kind":"debuff","stack":"refresh","flags":["cantMove","cantAct","cantCast"],"color":"#ffe14d"},
+  "root":    {"name":"ติดราก","kind":"debuff","stack":"refresh","flags":["cantMove"],"color":"#8b6b4a"},
+  "burn":    {"name":"ติดไฟ","kind":"debuff","stack":"refresh","dot":{"tick":1,"pctMaxHp":2,"min":3},"color":"#ff7a3a"},
+  "poison":  {"name":"พิษ","kind":"debuff","stack":"refresh","dot":{"tick":1,"pctMaxHp":1.5,"min":2},"color":"#7bd88f"},
+  "provoke": {"name":"ยั่วยุ","kind":"debuff","stack":"refresh","aggro":true,"color":"#ff4d6d"},
+  "endure":  {"name":"อดทน","kind":"buff","stack":"refresh","flags":["noFlinch"],"color":"#cfd8e6"},
+  "quicken": {"name":"เร่งดาบ","kind":"buff","stack":"refresh","color":"#ffb347"}
+}

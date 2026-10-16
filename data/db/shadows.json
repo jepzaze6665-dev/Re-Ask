@@ -1,0 +1,30 @@
+{
+  "_doc": "เงาอสูร (แทนการ์ด RO) — ลุ้นดรอปล้วน ไม่มี pity · seal = โบนัสเมื่อผนึกที่ ★1 (คูณตาม stars.mult) · summon = พฤติกรรมเมื่อเรียกออกมา · alt = เงาแปรธาตุ",
+  "rules": {
+    "stars": {"chance": [60, 25, 10, 4, 1], "mult": [1.0, 1.25, 1.5, 1.75, 2.0]},
+    "altChance": 5,
+    "lukBonus": 0.01,
+    "summonEnabled": false,
+    "_summonEnabled": "ปิดระบบเรียกเงาออกมาสู้ไว้ก่อน (โค้ดยังอยู่ใน game/shadow_game.js) — เปลี่ยนเป็น true เพื่อเปิด",
+    "summonMax": 1,
+    "unseal": {"_doc": "ถอดเงาออกจากอุปกรณ์ได้ แต่แพง = ตัวดูดเงิน", "zenyByStar": [5000, 10000, 20000, 40000, 80000], "zenyBossMult": 5, "breakChance": 15},
+    "sockets": {"_doc": "ของสวมใส่ที่ดรอปสุ่มจำนวนช่อง 0..maxSockets ของไอเทม", "chance": [50, 35, 12, 3]},
+    "fuse": {"_doc": "รวมเงาซ้ำเพื่อลุ้นอัปดาว", "need": 2, "successByStar": [70, 50, 30, 15], "failKeepsOne": true}
+  },
+  "shadow_sprout": {"name":"เงาต้นอ่อน","mob":"shadow_sprout","slot":"head","rate":0.3,
+    "seal":{"hpPct":3,"hpRegenPct":10},
+    "summon":{"role":"healer","healPctMaxHp":2,"interval":5,"attacks":false},
+    "alt":{"element":"water","summon":{"cleanse":["poison"]}}},
+  "shadow_root": {"name":"เงาเงาราก","mob":"shadow_root","slot":"weapon","rate":0.2,
+    "seal":{"atk":5,"onHit":{"status":"root","chance":3,"duration":1.5}},
+    "summon":{"role":"tank","taunt":true,"hpMult":3},
+    "alt":{"element":"fire","seal":{"onHit":{"status":"burn","chance":3,"duration":3}}}},
+  "thorn_wraith": {"name":"เงาภูตหนาม","mob":"thorn_wraith","slot":"garment","rate":0.1,
+    "seal":{"flee":3,"reflectMeleePct":8},
+    "summon":{"role":"hunter","element":"shadow","aspdMult":1.5,"target":"lowestHp"},
+    "alt":{"element":"holy","seal":{"reflectElement":"holy"}}},
+  "root_lord": {"name":"เงาราชาราก","mob":"root_lord","slot":"armor","rate":0.02,"boss":true,
+    "seal":{"size":{"large":15},"onKillHealPct":2},
+    "summon":{"role":"slam","interval":12,"aoeRadius":160,"pct":250,"stun":1},
+    "alt":{"element":"wind","summon":{"pull":true}}}
+}

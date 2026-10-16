@@ -1,10 +1,13 @@
 {
-  "novice":   {"name":"โนวิซ","jobLvMax":10,"hp":{"base":40,"perLv":10,"curve":0.2},"sp":{"base":10,"perLv":1},
-               "aspdBase":{"fist":50,"dagger":55,"sword1h":60},"jobBonus":{}},
-  "swordman": {"name":"นักดาบ","jobLvMax":50,"hp":{"base":60,"perLv":22,"curve":0.6},"sp":{"base":12,"perLv":2},
-               "aspdBase":{"fist":40,"dagger":65,"sword1h":55,"sword2h":60,"spear":65,"axe":70,"mace":65},
+  "_doc": "attackInterval = วินาทีต่อการตี 1 ครั้งก่อนลดด้วย AGI/DEX (ดู rules.attack) และเป็นรายการอาวุธที่อาชีพนี้ใช้ได้ · parent = อาชีพก่อนหน้า (สกิลสืบทอด) · advance = เงื่อนไขเปลี่ยนเป็นอาชีพนี้ (ทดสอบที่กิลด์ในเมือง): jobLv ของอาชีพเดิม, kills นับหลังรับเควสต์, items ถูกใช้ไป, reward ได้ตอนเปลี่ยน",
+  "novice":   {"name":"โนวิซ","tier":0,"jobLvMax":10,"hp":{"base":40,"perLv":10,"curve":0.2},"sp":{"base":10,"perLv":1},
+               "attackInterval":{"fist":0.9,"dagger":0.9,"sword1h":1.0},"jobBonus":{}},
+  "swordman": {"name":"นักดาบ","tier":1,"parent":"novice","jobLvMax":50,
+               "advance":{"jobLv":10,"kills":{"shadow_sprout":5},"items":{},"reward":[{"id":"training_sword","qty":1},{"id":"red_potion","qty":10}],"text":"พิสูจน์ฝีมือ: กำจัดต้นอ่อนเงา 5 ตัวในป่ารากมืด"},"hp":{"base":60,"perLv":22,"curve":0.6},"sp":{"base":12,"perLv":2},
+               "attackInterval":{"fist":0.8,"dagger":0.95,"sword1h":0.95,"sword2h":1.05,"spear":1.05,"axe":1.15,"mace":1.05},
                "jobBonus":{"2":{"str":1},"6":{"vit":1},"10":{"dex":1},"14":{"str":1},"18":{"luk":1}}},
-  "knight":   {"name":"อัศวินดำ","jobLvMax":50,"hp":{"base":120,"perLv":30,"curve":0.8},"sp":{"base":20,"perLv":3},
-               "aspdBase":{"fist":40,"dagger":60,"sword1h":52,"sword2h":55,"spear":58,"axe":62,"mace":60},
+  "knight":   {"name":"อัศวินดำ","tier":2,"parent":"swordman","jobLvMax":50,
+               "advance":{"jobLv":40,"kills":{"thorn_wraith":10},"items":{"shadow_jelly":10},"reward":[{"id":"dark_blade","qty":1}],"text":"บททดสอบอัศวินดำ: กำจัดภูตหนาม 10 ตัว และนำเยลลี่เงา 10 ชิ้นมาถวาย"},"hp":{"base":120,"perLv":30,"curve":0.8},"sp":{"base":20,"perLv":3},
+               "attackInterval":{"fist":0.8,"dagger":0.9,"sword1h":0.9,"sword2h":1.0,"spear":1.0,"axe":1.1,"mace":1.0},
                "jobBonus":{"2":{"vit":1},"4":{"str":1},"7":{"dex":1},"10":{"str":1},"13":{"agi":1},"16":{"vit":1},"20":{"str":1},"25":{"luk":1},"30":{"str":1}}}
 }

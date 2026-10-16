@@ -1,0 +1,23 @@
+{
+  "_doc": "ดันเจี้ยนสุ่ม (เข้าที่หินวาร์ปในเมือง กด F) · ทุกครั้งที่เข้าสุ่มแผนที่ใหม่จาก seed · size = ช่วงขนาด [min,max] · obstacles = จำนวนหิน/ผลึกกีดขวาง · pool = มอนที่สุ่มได้ (w = น้ำหนัก) · packs = จำนวนกลุ่ม · packSize = มอนต่อกลุ่ม · elite = มอนดุร้าย (สุ่มต่อตัว %) · boss = บอสท้ายดัน (ประตูบอสเปิดเมื่อฆ่ามอนครบ bossUnlockPct %) · reward = รางวัลเมื่อโค่นบอส (items.rate = %)",
+  "shadow_hollow": {
+    "name": "โพรงเงา", "desc": "โพรงใต้รากต้นไม้มืดที่เปลี่ยนรูปทุกครั้งที่เข้า", "lv": 5,
+    "size": {"w": [1800, 2400], "h": [1200, 1600]}, "obstacles": [12, 20],
+    "pool": [{"mob": "shadow_sprout", "w": 3}, {"mob": "shadow_root", "w": 4}, {"mob": "thorn_wraith", "w": 2}],
+    "packs": [6, 8], "packSize": [2, 4],
+    "elite": {"chance": 10, "hpMult": 2.5, "atkPct": 30, "expMult": 3},
+    "boss": {"mob": "root_lord", "hpMult": 0.7, "name": "ราชารากแห่งโพรง"},
+    "bossUnlockPct": 70,
+    "reward": {"exp": 1500, "jobExp": 900, "zeny": [800, 1500], "items": [{"id": "refine_ore", "qty": 2, "rate": 100}, {"id": "orange_potion", "qty": 5, "rate": 60}, {"id": "reset_stat_stone", "qty": 1, "rate": 5}]}
+  },
+  "deep_roots": {
+    "name": "รากลึก", "desc": "ชั้นลึกที่ภูตหนามทำรัง — อันตรายกว่ามาก", "lv": 12,
+    "size": {"w": [2400, 3000], "h": [1500, 1900]}, "obstacles": [18, 28],
+    "pool": [{"mob": "shadow_root", "w": 2}, {"mob": "thorn_wraith", "w": 5}],
+    "packs": [8, 11], "packSize": [3, 5],
+    "elite": {"chance": 18, "hpMult": 3, "atkPct": 40, "expMult": 3},
+    "boss": {"mob": "root_lord", "hpMult": 1.4, "name": "ราชารากโบราณ"},
+    "bossUnlockPct": 80,
+    "reward": {"exp": 6000, "jobExp": 3500, "zeny": [2500, 4000], "items": [{"id": "refine_ore", "qty": 4, "rate": 100}, {"id": "blue_potion", "qty": 3, "rate": 70}, {"id": "reset_skill_stone", "qty": 1, "rate": 10}, {"id": "lord_greatsword", "qty": 1, "rate": 4}]}
+  }
+}
